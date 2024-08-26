@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         } else {
                           isSignedIn = true;
                         }
-                            // 1
+                            // 2
                         if (passwordController.text == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
