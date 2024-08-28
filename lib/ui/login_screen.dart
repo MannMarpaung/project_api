@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_api/ui/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -91,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(
                       () {
                         // kondisi bila username null
-                        if (usernameController.text == null) {
+                        if (usernameController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -105,8 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         } else {
                           isSignedIn = true;
                         }
-                        
-                        if (passwordController.text == null) {
+
+                        if (passwordController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -117,24 +118,65 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           );
-                        } else if (passwordController.text == null) {}
+                        } else {
+                          isSignedIn = true;
+                        }
+
+                        if (usernameController.text.isNotEmpty &&
+                            passwordController.text.isNotEmpty) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainScreen(
+                                username: usernameController.text,
+                                password: passwordController.text,
+                              ),
+                            ),
+                            (route) => false,
+                          );
+                        }
                       },
                     );
                   },
                   style: ButtonStyle(
-                      elevation: WidgetStateProperty.all(5.0),
-                      backgroundColor: WidgetStateProperty.all(
-                          Color.fromARGB(255, 197, 215, 232))),
+                    elevation: WidgetStateProperty.all(5.0),
+                    backgroundColor: WidgetStateProperty.all(
+                      Color.fromARGB(255, 157, 209, 236),
+                    ),
+                  ),
                   child: Text(
                     'Login',
                     style: TextStyle(
                       fontFamily: 'Jost',
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ),
             ),
+            SizedBox(
+              height: 10.0,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/register');
+              },
+              style: ButtonStyle(
+                elevation: WidgetStatePropertyAll(
+                  5.0,
+                ),
+                backgroundColor: WidgetStatePropertyAll(
+                  Color.fromARGB(255, 247, 247, 247),
+                ),
+              ),
+              child: Text(
+                'Register',
+                style: TextStyle(
+                  fontFamily: 'Jost',
+                  color: Colors.black,
+                ),
+              ),
+            )
           ],
         ),
       ),

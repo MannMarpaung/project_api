@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_api/ui/login_screen.dart';
 import 'package:project_api/ui/main_screen.dart';
+import 'package:project_api/ui/register_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,6 +36,9 @@ class MyApp extends StatelessWidget {
       ),
       home: LoginScreen(),
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/register': (context) => RegisterScreen(),
+      },
     );
   }
 }
